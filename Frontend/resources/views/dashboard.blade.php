@@ -9,12 +9,12 @@
 <body>
     <div class="container mt-5">
         <h2>Bienvenido, {{ $alumno->nombre }} {{ $alumno->apellido }}</h2>
-        <p>Correo: {{ $alumno->correo }}</p>
+        <p>Correo: {{ $alumno->Correo }}</p>
 
         <div class="list-group mt-4">
-            <a href="#" class="list-group-item list-group-item-action">Matrícula de Clases</a>
-            <a href="#" class="list-group-item list-group-item-action">Ver Historial Académico</a>
-            <a href="#" class="list-group-item list-group-item-action">Ver Forma 003</a>
+            <a href="{{route('matricula.index')}}" class="list-group-item list-group-item-action">Matrícula de Clases</a>
+            <a href="{{route('historial')}}" class="list-group-item list-group-item-action">Ver Historial Académico</a>
+            <a href="{{route('forma03')}}" class="list-group-item list-group-item-action">Ver Forma 003</a>
         </div>
     </div>
 </body>

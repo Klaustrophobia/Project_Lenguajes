@@ -43,8 +43,13 @@ public class ClasesHistorialServicio {
         return clasesHistorialRepositorio.findAll();
     }
 
-    public List<ClasesHistorial> obtenerTodosPorEstudiante(HistorialAcademico historialAcademico){
+    public List<ClasesHistorial> obtenerTodosPorEstudiante(String numeroCuenta){
+        if(this.alumnosRepositorio.existsById(numeroCuenta)){
+        HistorialAcademico historialAcademico = this.historialAcademicoRepositorio.findByCuentaAlumno(numeroCuenta);
         return clasesHistorialRepositorio.findByHistorialAcademico(historialAcademico);
+        } else{
+            return null;
+        }
     }
 
     public ClasesHistorial crearEntrada(String cuentaAlumno, ClasesHistorial clasesHistorial){

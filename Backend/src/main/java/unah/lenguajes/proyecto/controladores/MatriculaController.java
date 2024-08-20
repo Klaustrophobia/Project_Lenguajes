@@ -29,4 +29,10 @@ public class MatriculaController {
     public Matricula insertarEnMatricula(@PathVariable String idAlumno, @RequestParam long idSeccion){
         return this.matriculaServicio.insertarEnMatricula(idSeccion, idAlumno);
     }
+
+    @GetMapping("/obtener/{numeroCuenta}")
+    public String getMethodName(@PathVariable String numeroCuenta) {
+        return new String();
+    }
+    
 }

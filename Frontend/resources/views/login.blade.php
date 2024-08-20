@@ -32,6 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                                <a class="btn btn-secondary btn-block" href="/landing">Regresar al inicio</a>
                             </div>
                         </form>
                     </div>

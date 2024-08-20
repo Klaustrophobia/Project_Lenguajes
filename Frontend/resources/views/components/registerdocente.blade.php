@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="card mt-5">
                     <div class="card-body">
-                        <h3 class="card-title text-center mb-4">Registro de Estudiante</h3>
+                        <h3 class="card-title text-center mb-4">Registro de Docente</h3>
 
                         @if(session('success'))
                             <div class="alert alert-success">
@@ -26,8 +26,12 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('register.post') }}" method="post">
+                        <form action="{{ route('registerdocente.post') }}" method="post">
                             @csrf
+                            <div class="form-group">
+                                <label for="nombre">Codigo</label>
+                                <input type="text" id="idDocente" name="idDocente" class="form-control" placeholder="Ingrese su nombre" required>
+                            </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese su nombre" required>
