@@ -32,11 +32,9 @@ class SeccionesController extends Controller
         $respuesta = Http::post('http://localhost:8091/api/secciones/crear/nuevo', $datos);
 
         //Verifica si la respuesta fue exitosa
-        if ($respuesta->successful()) {
+
             return redirect()->back();
-        } else {
-            return response()->json(['mensaje' => 'Error al guardar los datos'], 500);
-        }
+
 
 
     }

@@ -28,6 +28,16 @@ public class MatriculaServicio {
        return this.matriculaRepositorio.findAll();
     }
 
+    public List<Matricula> obtenerPorAlumno(String numeroCuenta){
+        if(this.alumnosRepositorio.existsById(numeroCuenta)){
+            Alumnos alumno = this.alumnosRepositorio.findById(numeroCuenta).get();
+
+            return this.matriculaRepositorio.findByAlumno(alumno);
+        } else{
+            return null;
+        }
+    }
+
     public Matricula insertarEnMatricula(long idSeccion, String idAlumno){
         if(this.seccionesRepositorio.existsById(idSeccion) && this.alumnosRepositorio.existsById(idAlumno)){
             Secciones seccion = this.seccionesRepositorio.findById(idSeccion).get();
@@ -42,6 +52,13 @@ public class MatriculaServicio {
         } else{
             return null;
         }
+    }
+
+    public void borrarMatricula(long idMatricula){
+        if(this.matriculaRepositorio.existsById(idMatricula)){
+            this.matriculaRepositorio.deleteById(idMatricula);
+        }
+        
     }
 
 }

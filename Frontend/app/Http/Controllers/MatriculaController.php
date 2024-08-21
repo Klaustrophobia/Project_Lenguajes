@@ -11,71 +11,57 @@ class MatriculaController extends Controller
     {
         // Obtener el número de cuenta del estudiante autenticado
         $alumno = $request->session()->get('alumno');
-        $numeroCuenta = $alumno->numeroCuenta;
+        $numeroCuenta = $alumno->NumeroCuenta;
 
         // Hacer una solicitud al backend para obtener las clases matriculadas
-        $response = Http::get("http://localhost:8091/api/matricula/obtener/todos");
+        $rutaApiMatriculas = 'http://localhost:8091/api/matricula/obtener/alumno/'.$numeroCuenta;
+        $response = Http::get($rutaApiMatriculas);
         $matriculas = $response->json();
 
         // Hacer una solicitud al backend para obtener las clases disponibles
-        $responseClases = Http::get("http://localhost:8091/api/clases/obtener/todos");
-        $clases = $responseClases->json();
+        $responseSecciones = Http::get("http://localhost:8091/api/secciones/obtener/todos");
+        $secciones = $responseSecciones->json();
 
         // Retornar la vista con las clases y matriculas
-        return view('matricula', compact('matriculas', 'clases'));
+        return view('matricula', compact('matriculas', 'secciones'));
     }
 
-    public function adicionar(Request $request)
-    {
+    public function adicionar(Request $request){
         // Obtener el número de cuenta del estudiante autenticado
         $alumno = $request->session()->get('alumno');
-        $numeroCuenta = $alumno->numeroCuenta;
+        $numeroCuenta = $alumno->NumeroCuenta;
 
-        $datos = $request->json()->all();
-
-        // Preparar los datos para la solicitud de matrícula
-        $data = [
-            'alumno' => [
-                'numeroCuenta' => $numeroCuenta
-            ],
-            'seccion' => [
-                'idSeccion' => $request->input('seccion_id')
-            ]
-        ];
+        $idSeccion = $request->idSeccion;
 
         // Hacer una solicitud al backend para adicionar la clase
-        $response = Http::post('http://localhost:8091/api/matricula/insertar/'.$numeroCuenta, $datos);
+        $response = Http::post('http://localhost:8091/api/matricula/insertar/'.$numeroCuenta.
+        '?idSeccion='.$idSeccion);
 
         // Verificar si la solicitud falló
         if ($response->failed()) {
-            return redirect()->back()->withErrors('Error al matricular la clase.');
+            return response()->json($request);
         }
 
         return redirect()->route('matricula.index')->with('success', 'Clase matriculada correctamente.');
     }
 
-    public function cancelar(Request $request)
-    {
+
+
+    public function cancelar(Request $request){
         // Obtener el número de cuenta del estudiante autenticado
-        $numeroCuenta = auth()->user()->numeroCuenta;
+        $alumno = $request->session()->get('alumno');
+        $numeroCuenta = $alumno->NumeroCuenta;
 
-        // Preparar los datos para la solicitud de cancelación
-        $data = [
-            'alumno' => [
-                'numeroCuenta' => $numeroCuenta
-            ],
-            'seccion' => [
-                'idSeccion' => $request->input('seccion_id')
-            ]
-        ];
+        $idMatricula = $request->matricula['idMatricula'];
 
+        $rutaApiBorrar = 'http://localhost:8091/api/matricula/borrar/'.$idMatricula;
         // Hacer una solicitud al backend para cancelar la clase
-        $response = Http::post('http://localhost:8091/api/matricula/cancelar', $data);
+        $response = Http::post($rutaApiBorrar);
 
         // Verificar si la solicitud falló
         if ($response->failed()) {
-            return redirect()->back()->withErrors('Error al cancelar la clase.');
-        }
+            return response()->json($request);
+        } 
 
         return redirect()->route('matricula.index')->with('success', 'Clase cancelada correctamente.');
     }

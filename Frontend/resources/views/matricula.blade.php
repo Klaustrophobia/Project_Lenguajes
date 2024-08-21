@@ -26,9 +26,9 @@
             @csrf
             <div class="form-group">
                 <label>Selecciona la Clase</label>
-                <select name="clase[codigo]" id="clase[codigo]">
-                    @foreach($clases as $clase)
-                    <option value="{{$clase['codigo']}}">{{$clase['codigo']}} {{$clase['nombre']}} </option>
+                <select name="idSeccion" id="idSeccion">
+                    @foreach($secciones as $seccion)
+                    <option value="{{$seccion['idSeccion']}}">{{$seccion['clase']['nombre']}} Seccion: {{$seccion['codigoSeccion']}} Docente: {{$seccion['docente']['nombre']}} {{$seccion['docente']['apellido']}}</option>
                     @endforeach
                 </select>
             </div>
@@ -41,10 +41,10 @@
         <ul class="list-group">
             @foreach($matriculas as $matricula)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ $matricula['clase']['nombre'] }} - Sección: {{ $matricula['seccion']['codigoSeccion'] }}
-                    <form action="{{ route('matricula.cancelar') }}" method="POST">
+                    {{ $matricula['seccion']['clase']['nombre'] }} - Sección: {{ $matricula['seccion']['codigoSeccion'] }}
+                    <form action="{{ route('matricula.cancelar') }}" method="post">
                         @csrf
-                        <input type="hidden" name="seccion_id" value="{{ $matricula['seccion']['idSeccion'] }}">
+                        <input type="hidden" name="matricula[idMatricula]" value="{{ $matricula['idMatricula'] }}">
                         <button type="submit" class="btn btn-danger">Cancelar</button>
                     </form>
                 </li>

@@ -27,9 +27,9 @@ class ClasesController extends Controller
 
         //Verifica si la respuesta fue exitosa
         if ($respuesta->successful()) {
-            return response()->json(['mensaje' => 'Datos guardados correctamente']);
+            return redirect()->route('agregarclases')->with('success', 'Clase agregada correctamente.');
         } else {
-            return response()->json(['mensaje' => 'Error al guardar los datos'], 500);
+            return redirect()->route('agregarclases')->with('success', 'No se pudo agregar la clase');
         }
 
 

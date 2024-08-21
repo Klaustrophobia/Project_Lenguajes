@@ -13,9 +13,9 @@
         <input type="hidden">
         <div class="form-group">
             <label>Clase</label>
-            <select name="clase[idClase]" id="clase[idClase]">
+            <select name="clase[codigo]" id="clase[codigo]">
                 @foreach($clasesArray as $clase)
-                <option value="{{$clase['idClase']}}">{{$clase['codigo']}} {{$clase['nombre']}} </option>
+                <option value="{{$clase['codigo']}}">{{$clase['codigo']}} {{$clase['nombre']}} </option>
                 @endforeach
             </select>
         </div>
@@ -46,6 +46,8 @@
         <button type="submit">Enviar</button>
 
     </form>
+
+    
 </body>
 
 

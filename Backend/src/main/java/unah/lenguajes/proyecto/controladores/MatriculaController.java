@@ -3,6 +3,7 @@ package unah.lenguajes.proyecto.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +31,14 @@ public class MatriculaController {
         return this.matriculaServicio.insertarEnMatricula(idSeccion, idAlumno);
     }
 
-    @GetMapping("/obtener/{numeroCuenta}")
-    public String getMethodName(@PathVariable String numeroCuenta) {
-        return new String();
+    @GetMapping("/obtener/alumno/{numeroCuenta}")
+    public List<Matricula> obtenerPorAlumno(@PathVariable String numeroCuenta) {
+        return this.matriculaServicio.obtenerPorAlumno(numeroCuenta);
+    }
+
+    @PostMapping("/borrar/{idMatricula}")
+    public void borrarMatricula(@PathVariable long idMatricula){
+         this.matriculaServicio.borrarMatricula(idMatricula);
     }
     
 }

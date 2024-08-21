@@ -95,7 +95,7 @@
                 unidadesValorativas: data.unidadesValorativas,
                 codigo: data.codigo,
                 carrera:{
-                    idCarrera: data.carrera[idCarrera]
+                    idCarrera: data['carrera[idCarrera]']
                 }
             };
         } else{
@@ -104,10 +104,10 @@
             unidadesValorativas: data.unidadesValorativas,
             codigo: data.codigo,
             claseRequisito:{
-                codigo: data.claseRequisito[codigo]
+                codigo: data['claseRequisito[codigo]']
             },
             carrera:{
-                idCarrera: data.carrera[idCarrera]
+                idCarrera: data['carrera[idCarrera]']
             }
 
         };

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\MatriculaController;
 use App\Http\Controllers\SeccionesController;
 use App\Http\Controllers\DocenteController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\DocenteDashboardController;
 use App\Http\Controllers\StudentHistorialController;
 use App\Http\Controllers\StudentForma03Controller;
+use App\Http\Controllers\HistorialController;
 
 Route::get('/', function () { return view('welcome'); });
 
@@ -52,3 +54,9 @@ Route::post('/agregarnotas/{numeroCuenta}',[ClasesHistorialController::class, 'g
 Route::get('/matricula', [MatriculaController::class, 'index'])->name('matricula.index');
 Route::post('/matricula/adicionar', [MatriculaController::class, 'adicionar'])->name('matricula.adicionar');
 Route::post('/matricula/cancelar', [MatriculaController::class, 'cancelar'])->name('matricula.cancelar');
+
+Route::get('/crearcarrera', [CarrerasController::class, 'index'])->name('crearcarrera');
+Route::post('/crearcarrera', [CarrerasController::class, 'guardarCarrera'])->name('crearcarrera.post');
+
+Route::get('/crearhistorial', [HistorialController::class, 'index'])->name('crearhistorial');
+Route::post('/crearhistorial', [HistorialController::class, 'guardarHistorial'])->name('crearhistorial.post');

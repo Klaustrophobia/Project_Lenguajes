@@ -15,6 +15,8 @@
             <a href="{{route('agregarsecciones')}}" class="list-group-item list-group-item-action">Agregar Secciones</a>
             <a href="{{route('selectalumno')}}" class="list-group-item list-group-item-action">Ingresar Notas</a>
             <a href="{{route('agregarclases')}}" class="list-group-item list-group-item-action">Crear Clases</a>
+            <a href="{{route('crearcarrera')}}" class="list-group-item list-group-item-action">Crear Carrera</a>
+            <a href="{{route('crearhistorial')}}" class="list-group-item list-group-item-action">Crear Historial Academico de un Alumno</a>
         </div>
     </div>
 </body>

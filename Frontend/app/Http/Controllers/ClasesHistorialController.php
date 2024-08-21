@@ -34,17 +34,32 @@ class ClasesHistorialController extends Controller
 
     public function guardarNotas(Request $request, $numeroCuenta){
         //Obtiene el json del request
-        $datos = $request->all();
+        $datos = $request->json()->all();
        // $datos = json_encode($datos);
 
+       $data = [
+        'clase' => [
+            'codigo' => $request->clase['codigo']
+        ],
+        'periodo' => [
+            'idPeriodo' => $request->periodo['idPeriodo']
+        ],
+        'calificacion' => $request->calificacion,
+        'estado' => [
+            'idEstado' => $request->estado['idEstado']
+        ]
+    ];
+
+        $rutaApi = 'http://localhost:8091/api/claseshistorial/crear/'.$numeroCuenta;
+
         //Utiliza la API para crear la clase
-       $respuesta = Http::post('http://localhost:8091/api/claseshistorial/crear/'.$numeroCuenta, $datos);
+       $respuesta = Http::post($rutaApi, $data);
 
         //Verifica si la respuesta fue exitosa
         if ($respuesta->successful()) {
-            return response()->json(['mensaje' => 'Datos guardados correctamente']);
-        } else {
-            return response()->json($datos);
+            return redirect()->route('dashboarddocente');
+        } else{
+            return response()->json($request);
         }
 
 
